@@ -1,2 +1,3 @@
 # School_Advisors
-This project is developed during Internship Used technologies - HTML, CSS, JS, bootstrap, MERN stack, ReactBootstrap
+This project is developed during Internship at Sumago Infotech Pvt. Ltd.
+Used technologies - HTML, CSS, JS, bootstrap, MERN stack, ReactBootstrap
