@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <meta name="description"
+    content="Create a webpage for school advisory services where students or parents can find schools according to areas. Add filters such as CBSE, SSC, ICSE, and display lists of schools using cards with an explore button for each school.">
+
+  <title>School Advisors</title>
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="assets/animatecss/animate.css">
+  <link rel="stylesheet" href="assets/theme/css/style.css">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700&display=swap" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <script src="/SA_Project/Frontend/src/App.js"></script>
+  <script src="/SA_Project/Backend/app.js"></script>
+  <link rel="stylesheet" href="/SA_Project/Frontend/src/App.css">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700&display=swap">
+  </noscript>
+  <link rel="preload" as="style" href="assets/additional/css/additional.css">
+  <link rel="stylesheet" href="assets/additional/css/additional.css" type="text/css">
+
+
+
+  <style>
+    :root {
+      --background: #000000;
+      --dominant-color: #F6AE2D;
+      --primary-color: #758E4F;
+      --secondary-color: #33658A;
+      --success-color: #20AC6B;
+      --danger-color: #AE1E2C;
+      --warning-color: #CC9900;
+      --info-color: #0AA3C2;
+      --background-text: #000000;
+      --dominant-text: #000000;
+      --primary-text: #FFFFFF;
+      --secondary-text: #FFFFFF;
+      --success-text: #FFFFFF;
+      --danger-text: #FFFFFF;
+      --warning-text: #000000;
+      --info-text: #FFFFFF;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <style>
+    .navbar-dropdown {
+      left: 0;
+      padding: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: all 0.45s ease;
+      z-index: 1030;
+      background: #282828;
+    }
+
+    .navbar-dropdown.navbar-fixed-top {
+      position: fixed;
+    }
+
+
+    .navbarmenu {
+      z-index: 1000;
+      width: 100%;
+      position: relative;
+    }
+
+    .navbarmenu .dropdown-item:before {
+      font-family: Moririse2 !important;
+      content: "\e966";
+      display: inline-block;
+      width: 0;
+      position: absolute;
+      left: 1rem;
+      top: 0.5rem;
+      margin-right: 0.5rem;
+      line-height: 1;
+      font-size: inherit;
+      vertical-align: middle;
+      text-align: center;
+      overflow: hidden;
+      transform: scale(0, 1);
+      transition: all 0.25s ease-in-out;
+    }
+
+    @media (max-width: 767px) {
+      .navbarmenu .navbar-toggler {
+        transform: scale(0.8);
+      }
+    }
+
+    .navbarmenu .navbar-brand {
+      flex-shrink: 0;
+      align-items: center;
+      margin-right: 0;
+      padding: 10px 0;
+      transition: all 0.3s;
+      word-break: break-word;
+      z-index: 1;
+    }
+
+    .navbarmenu .navbar-brand img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .navbarmenu .navbar-brand .navbar-caption {
+      line-height: inherit !important;
+    }
+
+    .navbarmenu .navbar-brand .navbar-logo a {
+      outline: none;
+    }
+
+    .navbarmenu .navbar-nav {
+      margin: auto;
+      margin-left: 0;
+      margin-left: auto;
+    }
+
+    .navbarmenu .navbar-nav .nav-item {
+      padding: 0 !important;
+      transition: 0.3s all !important;
+    }
+
+    .navbarmenu .navbar-nav .nav-item .nav-link {
+      padding: 16px !important;
+      margin: 0 !important;
+      border-radius: 1rem !important;
+      transition: 0.3s all !important;
+    }
+
+    .navbarmenu .navbar-nav .nav-item .nav-link:hover {
+      background-color: rgba(27, 31, 10, 0.06);
+    }
+
+    .navbarmenu .navbar-nav .open .nav-link::after {
+      transform: rotate(180deg);
+    }
+
+    @media (min-width: 992px) {
+      .navbarmenu .navbar-nav .open .nav-link::before {
+        content: "";
+        width: 100%;
+        height: 20px;
+        top: 100%;
+        background: transparent;
+        position: absolute;
+      }
+    }
+
+    .navbarmenu .navbar-nav .dropdown-item {
+      padding: 12px !important;
+      border-radius: 0.5rem !important;
+      margin: 0 8px !important;
+      transition: 0.3s all !important;
+    }
+
+    .navbarmenu .navbar-nav .dropdown-item:hover {
+      background-color: rgba(27, 31, 10, 0.06);
+    }
+
+    @media (min-width: 992px) {
+      .navbarmenu .navbar-nav {
+        padding-left: 1.5rem;
+      }
+    }
+
+    .navbarmenu .nav-link {
+      width: fit-content;
+      position: relative;
+    }
+
+    .navbarmenu .navbar-logo {
+      margin: 0 !important;
+    }
+
+    @media (max-width: 767px) {
+      .navbarmenu .navbar-logo {
+        padding-left: 0;
+      }
+    }
+
+    .navbarmenu .navbar-caption {
+      padding-left: 1rem;
+      padding-right: 0.5rem;
+    }
+
+    @media (max-width: 767px) {
+      .navbarmenu .nav-dropdown {
+        padding-bottom: 0.5rem;
+      }
+    }
+
+    .navbarmenu .nav-dropdown .link.dropdown-toggle::after {
+      margin-left: 0.5rem;
+      margin-top: 0.2rem;
+      transition: 0.3s all;
+    }
+
+    .navbarmenu .container {
+      display: flex;
+      height: 90px;
+      padding: 0.5rem 0.6rem;
+      flex-wrap: nowrap;
+      background: rgba(255, 255, 255, 0.8) !important;
+      left: 0;
+      right: 0;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: flex-end;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      border-radius: 100vw;
+      margin-top: 1rem;
+      background-color: #ffffff;
+      box-shadow: 0 30px 60px 0 rgba(27, 31, 10, 0.08);
+    }
+
+    @media (max-width: 992px) {
+      .navbarmenu .container {
+        padding-right: 2rem;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .navbarmenu .container {
+        width: 95%;
+        height: 56px !important;
+        padding-right: 1rem;
+        margin-top: 0rem;
+      }
+    }
+
+    .navbarmenu .iconfont-wrapper {
+      color: #000000 !important;
+      font-size: 1.5rem;
+      padding-right: 0.5rem;
+    }
+
+    .navbarmenu .dropdown-menu {
+      flex-wrap: wrap;
+      flex-direction: column;
+      max-width: 100%;
+      padding: 12px 4px !important;
+      border-radius: 1.5rem;
+      transition: 0.3s all !important;
+      min-width: auto;
+      background: #ffffff;
+      background: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    .navbarmenu .nav-item:focus,
+    .navbarmenu .nav-link:focus {
+      outline: none;
+    }
+
+    .navbarmenu .dropdown .dropdown-menu .dropdown-item {
+      width: auto;
+      transition: all 0.25s ease-in-out;
+    }
+
+    .navbarmenu .dropdown .dropdown-menu .dropdown-item::after {
+      right: 0.5rem;
+    }
+
+    .navbarmenu .dropdown .dropdown-menu .dropdown-item .mbr-iconfont {
+      margin-right: 0.5rem;
+      vertical-align: sub;
+    }
+
+    .navbarmenu .dropdown .dropdown-menu .dropdown-item .mbr-iconfont:before {
+      display: inline-block;
+      transform: scale(1, 1);
+      transition: all 0.25s ease-in-out;
+    }
+
+    .navbarmenu .collapsed .dropdown-menu .dropdown-item:before {
+      display: none;
+    }
+
+    .navbarmenu .collapsed .dropdown .dropdown-menu .dropdown-item {
+      padding: 0.235em 1.5em 0.235em 1.5em !important;
+      transition: none;
+      margin: 0 !important;
+    }
+
+    .navbarmenu .navbar {
+      min-height: 90px;
+      transition: all 0.3s;
+      border-bottom: 1px solid transparent;
+      background: transparent !important;
+      padding: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+    }
+
+    .navbarmenu .navbar.opened {
+      transition: all 0.3s;
+    }
+
+    .navbarmenu .navbar .dropdown-item {
+      padding: 0.5rem 1.8rem;
+    }
+
+    .navbarmenu .navbar .navbar-logo img {
+      min-width: 6rem;
+      object-fit: cover;
+    }
+
+    .navbarmenu .navbar .navbar-collapse {
+      z-index: 1;
+      justify-content: flex-end;
+    }
+
+    .navbarmenu .navbar.collapsed {
+      justify-content: center;
+    }
+
+    .navbarmenu .navbar.collapsed .nav-item .nav-link::before {
+      display: none;
+    }
+
+    .navbarmenu .navbar.collapsed.opened .dropdown-menu {
+      top: 0;
+    }
+
+    @media (min-width: 992px) {
+      .navbarmenu .navbar.collapsed.opened:not(.navbar-short) .navbar-collapse {
+        max-height: calc(98.5vh - 3rem);
+      }
+    }
+
+    .navbarmenu .navbar.collapsed .dropdown-menu .dropdown-submenu {
+      left: 0 !important;
+    }
+
+    .navbarmenu .navbar.collapsed .dropdown-menu .dropdown-item:after {
+      right: auto;
+    }
+
+    .navbarmenu .navbar.collapsed .dropdown-menu .dropdown-toggle[data-toggle="dropdown-submenu"]:after {
+      margin-left: 0.5rem;
+      margin-top: 0.2rem;
+      border-top: 0.35em solid;
+      border-right: 0.35em solid transparent;
+      border-left: 0.35em solid transparent;
+      border-bottom: 0;
+      top: 41%;
+    }
+
+    .navbarmenu .navbar.collapsed ul.navbar-nav li {
+      margin: auto;
+    }
+
+    .navbarmenu .navbar.collapsed .dropdown-menu .dropdown-item {
+      padding: 0.25rem 1.5rem;
+      text-align: center;
+    }
+
+    .navbarmenu .navbar.collapsed .icons-menu {
+      padding-left: 0;
+      padding-right: 0;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    @media (max-width: 767px) {
+      .navbarmenu .navbar {
+        min-height: 72px;
+      }
+
+      .navbarmenu .navbar .navbar-logo img {
+        height: 2.5rem !important;
+        min-width: 2.5rem !important;
+      }
+    }
+
+    @media (max-width: 991px) {
+      .navbarmenu .navbar .nav-item .nav-link::before {
+        display: none;
+      }
+
+      .navbarmenu .navbar.opened .dropdown-menu {
+        top: 0;
+      }
+
+      .navbarmenu .navbar .dropdown-menu .dropdown-submenu {
+        left: 0 !important;
+      }
+
+      .navbarmenu .navbar .dropdown-menu .dropdown-item:after {
+        right: auto;
+      }
+
+      .navbarmenu .navbar .dropdown-menu .dropdown-toggle[data-toggle="dropdown-submenu"]:after {
+        margin-left: 0.5rem;
+        margin-top: 0.2rem;
+        border-top: 0.35em solid;
+        border-right: 0.35em solid transparent;
+        border-left: 0.35em solid transparent;
+        border-bottom: 0;
+        top: 40%;
+      }
+
+      .navbarmenu .navbar .dropdown-menu .dropdown-item {
+        padding: 0.25rem 1.5rem !important;
+        text-align: center;
+      }
+
+      .navbarmenu .navbar .navbar-brand {
+        flex-shrink: initial;
+        flex-basis: auto;
+        word-break: break-word;
+        padding-right: 10px;
+      }
+
+      .navbarmenu .navbar .navbar-toggler {
+        flex-basis: auto;
+      }
+
+      .navbarmenu .navbar .icons-menu {
+        padding-left: 0;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
+    }
+
+    .navbarmenu .navbar.navbar-short .navbar-logo img {
+      height: 2rem;
+    }
+
+    .navbarmenu .dropdown-item.active,
+    .navbarmenu .dropdown-item:active {
+      background-color: transparent;
+    }
+
+    .navbarmenu .navbar-expand-lg .navbar-nav .nav-link {
+      padding: 0;
+    }
+
+    .navbarmenu .nav-dropdown .link.dropdown-toggle {
+      margin-right: 1.667em;
+    }
+
+    .navbarmenu .nav-dropdown .link.dropdown-toggle[aria-expanded="true"] {
+      margin-right: 0;
+      padding: 0.667em 1.667em;
+    }
+
+    .navbarmenu .navbar.navbar-expand-lg .dropdown .dropdown-menu {
+      background: #ffffff;
+    }
+
+    .navbarmenu .navbar.navbar-expand-lg .dropdown .dropdown-menu .dropdown-submenu {
+      margin: 0;
+      left: 105%;
+      transform: none;
+      top: -12px;
+    }
+
+    .navbarmenu .navbar .dropdown.open>.dropdown-menu {
+      display: flex;
+    }
+
+    .navbarmenu ul.navbar-nav {
+      flex-wrap: wrap;
+    }
+
+    .navbarmenu .navbar-buttons {
+      text-align: center;
+      min-width: 140px;
+    }
+
+    @media (max-width: 992px) {
+      .navbarmenu .navbar-buttons {
+        text-align: left;
+      }
+    }
+
+    .navbarmenu button.navbar-toggler {
+      outline: none;
+      width: 31px;
+      height: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      align-self: center;
+    }
+
+    .navbarmenu button.navbar-toggler .navbarbutton span {
+      position: absolute;
+      right: 0;
+      width: 30px;
+      height: 2px;
+      border-right: 5px;
+      background-color: #000000;
+    }
+
+    .navbarmenu button.navbar-toggler .navbarbutton span:nth-child(1) {
+      top: 0;
+      transition: all 0.2s;
+    }
+
+    .navbarmenu button.navbar-toggler .navbarbutton span:nth-child(2) {
+      top: 8px;
+      transition: all 0.15s;
+    }
+
+    .navbarmenu button.navbar-toggler .navbarbutton span:nth-child(3) {
+      top: 8px;
+      transition: all 0.15s;
+    }
+
+    .navbarmenu button.navbar-toggler .navbarbutton span:nth-child(4) {
+      top: 16px;
+      transition: all 0.2s;
+    }
+
+    .navbarmenu nav.opened .navbarbutton span:nth-child(1) {
+      top: 8px;
+      width: 0;
+      opacity: 0;
+      right: 50%;
+      transition: all 0.2s;
+    }
+
+    .navbarmenu nav.opened .navbarbutton span:nth-child(2) {
+      transform: rotate(45deg);
+      transition: all 0.25s;
+    }
+
+    .navbarmenu nav.opened .navbarbutton span:nth-child(3) {
+      transform: rotate(-45deg);
+      transition: all 0.25s;
+    }
+
+    .navbarmenu nav.opened .navbarbutton span:nth-child(4) {
+      top: 8px;
+      width: 0;
+      opacity: 0;
+      right: 50%;
+      transition: all 0.2s;
+    }
+
+    .navbarmenu .navbar-dropdown {
+      padding: 0 1rem;
+    }
+
+    .navbarmenu a.nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .navbarmenu .icons-menu {
+      flex-wrap: nowrap;
+      display: flex;
+      justify-content: center;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      padding-top: 0.3rem;
+      text-align: center;
+    }
+
+    @media (max-width: 992px) {
+      .navbarmenu .icons-menu {
+        justify-content: flex-start;
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    @media screen and (-ms-high-contrast: active),
+    (-ms-high-contrast: none) {
+      .navbarmenu .navbar {
+        height: 70px;
+      }
+
+      .navbarmenu .navbar.opened {
+        height: auto;
+      }
+
+      .navbarmenu .nav-item .nav-link:hover::before {
+        width: 175%;
+        max-width: calc(100% + 2rem);
+        left: -1rem;
+      }
+    }
+
+    .navbarmenu .navbar .dropdown>.dropdown-menu {
+      display: none;
+      width: max-content;
+      max-width: 500px !important;
+      transform: translateX(-50%);
+      top: calc(100% + 20px);
+      left: 50%;
+    }
+
+    .navbarmenu .navbar .dropdown>.dropdown-menu .dropdown-item {
+      line-height: 1 !important;
+    }
+
+    .navbarmenu .navbar .dropdown>.dropdown-menu .dropdown .dropdown-item {
+      align-items: center;
+      display: flex;
+      height: max-content !important;
+      min-height: max-content !important;
+    }
+
+    .navbarmenu .navbar .dropdown>.dropdown-menu .dropdown .dropdown-item::after {
+      display: inline-block;
+      position: static;
+      margin-left: 0.5rem;
+      margin-top: 0;
+      margin-right: 0;
+      margin-bottom: 0;
+      transition: 0.3s all;
+      transform: rotate(-90deg);
+    }
+
+    .navbarmenu .navbar .dropdown>.dropdown-menu .dropdown.open .dropdown-item::after {
+      transform: rotate(0deg);
+    }
+
+    .navbarmenu .mbr-section-btn {
+      margin: -0.6rem -0.6rem;
+    }
+
+    .navbarmenu .navbar-toggler {
+      margin-left: 12px;
+      margin-right: 8px;
+      order: 1000;
+    }
+
+    @media (max-width: 991px) {
+      .navbarmenu .navbar-brand {
+        margin-right: auto;
+      }
+
+      .navbarmenu .navbar-collapse {
+        z-index: -1 !important;
+        position: absolute;
+        top: 110%;
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+        border-radius: 1.5rem;
+        background: #ffffff;
+        opacity: 1;
+        border-color: rgba(255, 255, 255, 0.8) !important;
+        background: rgba(255, 255, 255, 0.8) !important;
+        backdrop-filter: blur(8px);
+      }
+
+      .navbarmenu .navbar-nav .nav-item .nav-link::after {
+        margin-left: 10px;
+      }
+
+      .navbarmenu .navbar-nav .dropdown-item:hover {
+        background-color: rgba(27, 31, 10, 0.06);
+      }
+
+      .navbarmenu .navbar .dropdown>.dropdown-menu {
+        max-width: 100% !important;
+        transform: translateX(0);
+        top: 10px;
+        left: 0;
+        padding: 8px !important;
+        border-radius: 1rem;
+        background-color: rgba(27, 31, 10, 0.04) !important;
+      }
+
+      .navbarmenu .navbar .dropdown>.dropdown-menu .dropdown-item {
+        padding: 8px !important;
+        line-height: 1 !important;
+        margin-bottom: 4px !important;
+      }
+
+      .navbarmenu .navbar .dropdown>.dropdown-menu .dropdown .dropdown-item {
+        align-items: center;
+        display: flex;
+        height: max-content !important;
+        min-height: max-content !important;
+      }
+
+      .navbarmenu .navbar .dropdown>.dropdown-menu .dropdown .dropdown-item::after {
+        display: inline-block;
+        position: static;
+        margin-left: 0.5rem;
+        margin-top: 0;
+        margin-right: 0;
+        margin-bottom: 0;
+        transition: 0.3s all;
+        transform: rotate(0deg);
+      }
+
+      .navbarmenu .navbar .dropdown>.dropdown-menu .dropdown.open .dropdown-item::after {
+        transform: rotate(180deg);
+      }
+
+      .navbarmenu .navbar .dropdown>.dropdown-menu .dropdown-submenu {
+        position: static;
+        width: 100%;
+        max-width: 100% !important;
+        transform: translateX(0) !important;
+        top: 0;
+        left: 0;
+        padding: 8px !important;
+        border-radius: 1rem;
+        background-color: rgba(27, 31, 10, 0.04) !important;
+      }
+
+      .navbarmenu .navbar .dropdown.open>.dropdown-menu {
+        display: flex !important;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 575px) {
+      .navbarmenu .navbar-collapse {
+        padding: 1rem;
+      }
+    }
+  </style>
+
+  <section class="menu menu2 navbarmenu" once="menu" id="menu-5-u2a3E2PE6V">
+    <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+      <div class="container">
+        <div class="navbar-brand">
+          <span class="navbar-logo">
+            <a href="">
+              <img src="assets/images/Logoo.png " style="height: 4.3rem;">
+            </a>
+          </span>
+          <span class="navbar-caption-wrap">
+            <a class="navbar-caption text-black display-4" href="index.html"><span
+                style="color: #CC9900;font-size:30px;"><b>School</span style="font-size:30px"> Advisors</a></b>
+          </span>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse"
+          data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <div class="navbarbutton">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
+            <li class="nav-item">
+              <a class="nav-link link text-black display-4" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link link text-black display-4" href="#about" aria-expanded="false">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link link text-black display-4" href="#join">Packages</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link link text-black display-4" href="#faq">FAQ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link link text-black display-4" href="http://localhost:3000/registration">Register</a>
+            </li>
+          </ul>
+          <div class="navbar-buttons mbr-section-btn">
+            <a class="btn btn-primary display-4" href="Schools.html">Explore</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </section>
+
+  <style>
+    .headersection {
+      display: flex;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("assets/images/pexels-rebecca-zaal-764681.jpg");
+      background-size: cover;
+    }
+
+    .headersection .mbr-overlay {
+      background-color: #000000;
+      opacity: 0.5;
+    }
+
+    @media (min-width: 768px) {
+      .headersection {
+        align-items: flex-end;
+      }
+
+      .headersection .row {
+        justify-content: center;
+      }
+
+      .headersection .content-wrap {
+        padding: 1rem 3rem;
+      }
+    }
+
+    @media (max-width: 991px) and (min-width: 768px) {
+      .headersection .content-wrap {
+        min-width: 50%;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .headersection {
+        -webkit-align-items: center;
+        align-items: flex-end;
+      }
+
+      .headersection .mbr-row {
+        -webkit-justify-content: center;
+        justify-content: center;
+      }
+
+      .headersection .content-wrap {
+        width: 100%;
+      }
+    }
+
+    .headersection .mbr-section-title,
+    .headersection .mbr-section-subtitle {
+      text-align: center;
+    }
+
+    .headersection .mbr-text,
+    .headersection .mbr-section-btn {
+      text-align: center;
+    }
+  </style>
+  <section class="header16 headersection mbr-fullscreen mbr-parallax-background" id="home">
+    <div class="mbr-overlay" style="opacity: 0.3; background-color: rgb(0, 0, 0);"></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="content-wrap col-12 col-md-10">
+          <h1 class="mbr-section-title mbr-fonts-style mbr-white mb-4 display-1">
+            <strong>Personalized Guidance</strong>
+          </h1>
+          <p class="mbr-fonts-style mbr-text mbr-white mb-4 display-7">Discover the perfect school for your child with
+            our comprehensive advisory services. Explore CBSE, SSC, and ICSE schools in your area.</p>
+          <div class="mbr-section-btn"><a class="btn btn-white-outline display-7" href="Schools.html">Get Started</a><a class="btn btn-white-outline display-7" href="http://localhost:3000/registration">Register Your School</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <style>
+    .aboutsection {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+      background-color: transparent;
+    }
+
+    .aboutsection .mbr-fallback-image.disabled {
+      display: none;
+    }
+
+    .aboutsection .mbr-fallback-image {
+      display: block;
+      background-size: cover;
+      background-position: center center;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+    }
+
+    @media (max-width: 767px) {
+      .aboutsection .card-content-text {
+        padding: 1.5rem 1.5rem 0 1.5rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .aboutsection .card-content-text {
+        padding: 2.25rem 2.25rem 0 2.25rem;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .aboutsection .card-content-text {
+        padding: 4rem 4rem 1rem 4rem;
+      }
+    }
+
+    .aboutsection .card-wrapper {
+      background: #ffffff;
+    }
+
+    .aboutsection .mbr-text,
+    .aboutsection .mbr-section-btn {
+      color: #000000;
+      text-align: left;
+    }
+
+    .aboutsection .card-title,
+    .aboutsection .card-box {
+      text-align: left;
+      color: #000000;
+    }
+  </style>
+  <section class="article9 aboutsection" id="about">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="card col-md-12 col-lg-10">
+          <div class="card-wrapper">
+            <div class="card-content-text">
+              <h3 class="card-title mbr-fonts-style mbr-white mt-3 mb-4 display-2">
+                <strong>Who We Are</strong>
+              </h3>
+              <div class="row card-box align-left">
+                <div class="item features-without-image col-12">
+                  <div class="item-wrapper">
+                    <p class="mbr-text mbr-fonts-style display-7">At School Advisors, we are dedicated to helping
+                      students and parents find the best schools based on their preferences and location.</p>
+                  </div>
+                </div>
+                <div class="item features-without-image col-12">
+                  <div class="item-wrapper">
+                    <p class="mbr-text mbr-fonts-style display-7">Our team of experts curates a list of top CBSE, SSC,
+                      and ICSE schools, ensuring that you have access to the finest educational institutions.</p>
+                  </div>
+                </div>
+                <div class="item features-without-image col-12">
+                  <div class="item-wrapper">
+                    <p class="mbr-text mbr-fonts-style display-7">With our user-friendly interface, you can easily
+                      navigate through the options and explore each school&#x27;s unique offerings.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="image-wrapper d-flex justify-content-center mt-3">
+              <img src="assets/images/pexels-anil-sharma-11367436.jpg">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </section>
+  <style>
+    .whysection {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+      background-color: transparent;
+    }
+
+    .whysection .mbr-fallback-image.disabled {
+      display: none;
+    }
+
+    .whysection .mbr-fallback-image {
+      display: block;
+      background-size: cover;
+      background-position: center center;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+    }
+
+    @media (max-width: 767px) {
+      .whysection .card-content-text {
+        padding: 0 1.5rem 1.5rem 1.5rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .whysection .card-content-text {
+        padding: 0 2.25rem 2.25rem 2.25rem;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .whysection .card-content-text {
+        padding: 1rem 4rem 4rem 4rem;
+      }
+    }
+
+    .whysection .card-wrapper {
+      background: #ffffff;
+    }
+
+    .whysection .mbr-text,
+    .whysection .mbr-section-btn {
+      color: #000000;
+      text-align: left;
+    }
+
+    .whysection .card-title,
+    .whysection .card-box {
+      text-align: left;
+      color: #000000;
+    }
+  </style>
+  <section class="article8 whysection" id="">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="card col-md-12 col-lg-10">
+          <div class="card-wrapper">
+            <div class="image-wrapper d-flex justify-content-center mb-4">
+              <img src="">
+            </div>
+            <div class="card-content-text">
+              <h3 class="card-title mbr-fonts-style mbr-white mt-3 mb-4 display-2">
+                <strong>Why Choose Us</strong>
+              </h3>
+              <div class="row card-box align-left">
+                <div class="item features-without-image col-12">
+                  <div class="item-wrapper">
+                    <p class="mbr-text mbr-fonts-style display-7">EduConnect offers a one-of-a-kind platform for
+                      discovering and exploring schools in your area. We provide a seamless experience, making it easy
+                      for you to find the perfect educational institution for your child.</p>
+                  </div>
+                </div>
+                <div class="item features-without-image col-12">
+                  <div class="item-wrapper">
+                    <p class="mbr-text mbr-fonts-style display-7">Our commitment to excellence ensures that you have
+                      access to the most comprehensive and up-to-date information about CBSE, SSC, and ICSE schools.</p>
+                  </div>
+                </div>
+                <div class="item features-without-image col-12">
+                  <div class="item-wrapper">
+                    <p class="mbr-text mbr-fonts-style display-7">Join us in the exciting journey of finding the ideal
+                      school that meets your child&#x27;s educational needs.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <style>
+    .joinsection {
+      padding-top: 5rem;
+      padding-bottom: 4rem;
+      background-color: transparent;
+    }
+
+    .joinsection .item-mb {
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 767px) {
+      .joinsection .item-mb {
+        margin-bottom: 1rem;
+      }
+    }
+
+    .joinsection .item-head {
+      background: var(--primary-color, #9fe870);
+      padding: 2.25rem;
+    }
+
+    @media (min-width: 992px) and (max-width: 1200px) {
+      .joinsection .item-head {
+        padding: 2rem 1.5rem;
+        margin-bottom: 2rem;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .joinsection .item-head {
+        padding: 2rem 1.5rem;
+        margin-bottom: 2rem;
+      }
+    }
+
+    .joinsection .item-content {
+      padding: 2.25rem 2.25rem 0;
+      background: #ffffff;
+    }
+
+    @media (min-width: 992px) and (max-width: 1200px) {
+      .joinsection .item-content {
+        padding: 0rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .joinsection .item-content {
+        padding: 0rem 1.5rem;
+      }
+    }
+
+    .joinsection .item-wrapper {
+      border-radius: 2rem;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      background: #ffffff;
+      padding: 0rem;
+      height: 100%;
+      display: flex;
+      flex-flow: column nowrap;
+    }
+
+    @media (max-width: 767px) {
+      .joinsection .item-wrapper {
+        margin-bottom: 1rem;
+      }
+    }
+
+    @media (min-width: 992px) and (max-width: 1200px) {
+      .joinsection .item-wrapper .item-footer {
+        padding: 0 1.5rem 2rem;
+      }
+    }
+
+    @media (min-width: 1201px) {
+      .joinsection .item-wrapper .item-footer {
+        padding: 0 2rem 2rem;
+      }
+    }
+
+    .joinsection .btn {
+      width: -webkit-fill-available;
+    }
+
+    .joinsection .item:focus,
+    .joinsection span:focus {
+      outline: none;
+    }
+
+    .joinsection .mbr-section-btn {
+      margin-top: auto !important;
+      padding: 2rem 2rem 0;
+    }
+
+    @media (max-width: 991px) {
+      .joinsection .mbr-section-btn {
+        padding: 0rem 2.25rem 2rem;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .joinsection .mbr-section-btn {
+        padding: 0rem 1.5rem;
+        margin-bottom: 2rem;
+      }
+    }
+
+    .joinsection .mbr-section-title {
+      color: #000000;
+    }
+
+    .joinsection .mbr-section-subtitle {
+      color: #ffffff;
+    }
+
+    .joinsection .mbr-text,
+    .joinsection .mbr-section-btn {
+      text-align: left;
+    }
+
+    .joinsection .item-title {
+      text-align: left;
+      color: var(--primary-text, #ffffff);
+    }
+
+    .joinsection .item-subtitle {
+      text-align: left;
+      color: var(--primary-text, #ffffff);
+    }
+
+    .joinsection .content-head {
+      max-width: 800px;
+    }
+  </style>
+  <section class="pricing1 joinsection" id="join">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-12 content-head">
+          <div class="mbr-section-head mb-5">
+            <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+              <strong>Packages</strong>
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="item features-without-image col-12 col-md-6 col-lg-3 item-mb">
+          <div class="item-wrapper">
+            <div class="item-head">
+              <h5 class="item-title mbr-fonts-style mb-0 display-5">
+                <strong>Basic</strong>
+              </h5>
+              <h6 class="item-subtitle mbr-fonts-style mt-0 mb-0 display-7">
+                <strong>Starter Package</strong>
+              </h6>
+            </div>
+            <div class="item-content">
+              <p class="mbr-text mbr-fonts-style display-7">Free Hosting .<br> Limited number of pages.<br> Basic Design
+                and Layout.<br>100mb Storage Space.</p>
+            </div>
+            <div class="mbr-section-btn item-footer"><a href="http://localhost:3000/registration"
+                class="btn item-btn btn-primary display-7">₹599 Per
+                Month</a></div>
+          </div>
+        </div>
+        <div class="item features-without-image col-12 col-md-6 col-lg-3 item-mb">
+          <div class="item-wrapper">
+            <div class="item-head">
+              <h5 class="item-title mbr-fonts-style mb-0 display-5">
+                <strong>Standard</strong>
+              </h5>
+              <h6 class="item-subtitle mbr-fonts-style mt-0 mb-0 display-7">
+                <strong>Professional Package</strong>
+              </h6>
+            </div>
+            <div class="item-content">
+              <p class="mbr-text mbr-fonts-style display-7">Free Hosting.<br>More pages than Basic Package.<br>Enhanced
+                Design and Layout .<br>500mb Storage Space.</p>
+            </div>
+            <div class="mbr-section-btn item-footer"><a href="http://localhost:3000/registration"
+                class="btn item-btn btn-primary display-7">₹799 Per
+                Month</a></div>
+          </div>
+        </div>
+        <div class="item features-without-image col-12 col-md-6 col-lg-3 item-mb">
+          <div class="item-wrapper">
+            <div class="item-head">
+              <h5 class="item-title mbr-fonts-style mb-0 display-5">
+                <strong>Premium</strong>
+              </h5>
+              <h6 class="item-subtitle mbr-fonts-style mt-0 mb-0 display-7">
+                <strong>Ultimate Package</strong>
+              </h6>
+            </div>
+            <div class="item-content">
+              <p class="mbr-text mbr-fonts-style display-7">Access to Basic and Standard Packages.<br>Advance
+                Functionality. <br>Standard Customer Support.<br>Unlimited Storage Space.</p>
+            </div>
+            <div class="mbr-section-btn item-footer"><a href="http://localhost:3000/registration"
+                class="btn item-btn btn-primary display-7">₹999 Per
+                Month</a></div>
+          </div>
+        </div>
+        <div class="item features-without-image col-12 col-md-6 col-lg-3 item-mb">
+          <div class="item-wrapper">
+            <div class="item-head">
+              <h5 class="item-title mbr-fonts-style mb-0 display-5">
+                <strong>Custom</strong>
+              </h5>
+              <h6 class="item-subtitle mbr-fonts-style mt-0 mb-0 display-7">
+                <strong>Custom Package</strong>
+              </h6>
+            </div>
+            <div class="item-content">
+              <p class="mbr-text mbr-fonts-style display-7">We Will Customize your website According to Your Preferance.
+              </p>
+            </div>
+            <div class="mbr-section-btn item-footer"><a href="http://localhost:3000/registration"
+                class="btn item-btn btn-primary display-7">Depends</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <style>
+    .faqsection {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+      background-color: transparent;
+    }
+
+    .faqsection .mbr-text {
+      color: #000000;
+    }
+
+    .faqsection .mbr-section-subtitle {
+      color: #000000;
+    }
+
+    .faqsection .mbr-section-title {
+      color: #000000;
+      text-align: center;
+    }
+
+    .faqsection .mbr-text,
+    .faqsection .item .mbr-section-btn {
+      text-align: left;
+    }
+
+    .faqsection .item-wrapper {
+      background: #ffffff;
+      margin-bottom: 2rem;
+      padding: 2.25rem;
+    }
+
+    @media (min-width: 992px) and (max-width: 1200px) {
+      .faqsection .item-wrapper {
+        padding: 2rem 1.5rem;
+        margin-bottom: 2rem;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .faqsection .item-wrapper {
+        padding: 2rem 1.5rem;
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
+  <section class="list05 faqsection" id="faq">
+    <div class="container">
+      <div class="col-12 mb-5 content-head">
+        <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+          <strong>FAQ</strong>
+        </h3>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+          <div class="item features-without-image col-12 active">
+            <div class="item-wrapper">
+              <h5 class="mbr-card-title mbr-fonts-style mt-0 mb-3 display-5">
+                <strong>How do I explore schools?</strong>
+              </h5>
+              <p class="mbr-text mbr-fonts-style mt-0 mb-3 display-7">
+                Simply select the board (CBSE, SSC, or ICSE) and start exploring the available schools.
+              </p>
+            </div>
+          </div>
+          <div class="item features-without-image col-12">
+            <div class="item-wrapper">
+              <h5 class="mbr-card-title mbr-fonts-style mt-0 mb-3 display-5">
+                <strong>Can I access school websites directly?</strong>
+              </h5>
+              <p class="mbr-text mbr-fonts-style mt-0 mb-3 display-7">
+                Yes, each school card has an &#x27;Explore&#x27; button that takes you to the school&#x27;s website.
+              </p>
+            </div>
+          </div>
+          <div class="item features-without-image col-12">
+            <div class="item-wrapper">
+              <h5 class="mbr-card-title mbr-fonts-style mt-0 mb-3 display-5">
+                <strong>Are the listings regularly updated?</strong>
+              </h5>
+              <p class="mbr-text mbr-fonts-style mt-0 mb-3 display-7">
+                Absolutely! We ensure that our school listings are regularly updated to provide accurate information.
+              </p>
+            </div>
+          </div>
+          <div class="item features-without-image col-12">
+            <div class="item-wrapper">
+              <h5 class="mbr-card-title mbr-fonts-style mt-0 mb-3 display-5">
+                <strong>Do you offer personalized recommendations?</strong>
+              </h5>
+              <p class="mbr-text mbr-fonts-style mt-0 mb-3 display-7">
+                Yes, our Premium and Ultimate plans include personalized school recommendations based on your
+                preferences.
+              </p>
+            </div>
+          </div>
+          <div class="item features-without-image col-12">
+            <div class="item-wrapper">
+              <h5 class="mbr-card-title mbr-fonts-style mt-0 mb-3 display-5">
+                <strong>How can I get priority support?</strong>
+              </h5>
+              <p class="mbr-text mbr-fonts-style mt-0 mb-3 display-7">
+                Priority support is included in our Ultimate plan, ensuring that your queries are addressed promptly.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <style>
+    .numbersection {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      background-color: #ffffff;
+    }
+
+    .numbersection .mbr-fallback-image.disabled {
+      display: none;
+    }
+
+    .numbersection .item-wrapper {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .numbersection .mbr-fallback-image {
+      display: block;
+      background-size: cover;
+      background-position: center center;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+    }
+
+    .numbersection .mbr-iconfont {
+      display: inline-flex;
+      font-size: 2rem;
+      color: var(--primary-color, #d70081);
+      width: 80px;
+      justify-content: center;
+      align-items: center;
+      background: #ffc5e8;
+      height: 80px;
+      border-radius: 50%;
+    }
+
+    .numbersection .card-title,
+    .numbersection .iconfont-wrapper {
+      color: var(--primary-color, #d70081);
+      text-align: center;
+    }
+
+    .numbersection .card-text {
+      color: #000000;
+      text-align: center;
+    }
+
+    .numbersection .content-head {
+      max-width: 800px;
+    }
+
+    .numbersection .mbr-section-title {
+      color: #000000;
+    }
+  </style>
+  <section class="features10 numbersection" id="metrics-2-u2a3E2Rxhg">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="item features-without-image col-12 col-md-6 col-lg-4">
+          <div class="item-wrapper">
+            <div class="card-box align-left">
+              <h5 class="card-title mbr-fonts-style display-1">
+                <strong>11+</strong>
+              </h5>
+              <p class="card-text mbr-fonts-style mb-3 display-7">
+                ICSE Schools
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="item features-without-image col-12 col-md-6 col-lg-4">
+          <div class="item-wrapper">
+            <div class="card-box align-left">
+              <h5 class="card-title mbr-fonts-style display-1">
+                <strong>28+</strong>
+              </h5>
+              <p class="card-text mbr-fonts-style mb-3 display-7">
+                CBSE Schools
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="item features-without-image col-12 col-md-6 col-lg-4">
+          <div class="item-wrapper">
+            <div class="card-box align-left">
+              <h5 class="card-title mbr-fonts-style display-1">
+                <strong>91+</strong>
+              </h5>
+              <p class="card-text mbr-fonts-style mb-3 display-7">
+                SSC Schools
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .programsection {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+      background-color: #fde5f3;
+    }
+
+    .programsection .mbr-fallback-image.disabled {
+      display: none;
+    }
+
+    .programsection .mbr-fallback-image {
+      display: block;
+      background-size: cover;
+      background-position: center center;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+    }
+
+    .programsection .row-reverse {
+      flex-direction: row-reverse;
+    }
+
+    @media (max-width: 991px) {
+      .programsection .image-wrapper {
+        margin-bottom: 1rem;
+      }
+    }
+
+    .programsection .row {
+      align-items: center;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    @media (max-width: 991px) {
+      .programsection .image-wrapper {
+        padding: 1rem;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .programsection .text-wrapper {
+        padding: 0 2rem;
+      }
+    }
+
+    .programsection .mbr-section-title {
+      color: #000000;
+    }
+
+    .programsection .mbr-text,
+    .programsection .mbr-section-btn {
+      color: #000000;
+    }
+
+    .programsection img {
+      width: 100%;
+      object-fit: cover;
+      height: 30rem;
+    }
+
+    @media (max-width: 767px) {
+      .programsection img {
+        height: 15rem;
+      }
+    }
+  </style>
+  <section class="features28 programsection" id="features-28-u2a55rDE3E">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-12 col-lg">
+          <div class="text-wrapper align-left">
+            <h1 class="mbr-section-title mbr-fonts-style mb-4 display-2">
+              <strong>Innovative Programs</strong>
+            </h1>
+            <p class="mbr-text align-left mbr-fonts-style mb-4 display-7">
+              Our schools offer innovative programs that integrate technology, arts, and real-world experiences to
+              prepare students for the future.
+            </p>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-12 col-lg-6 image-wrapper">
+          <img class="w-100" src="assets/images/pexels-naomi-shi-1001914.jpg">
+        </div>
+      </div>
+      <div class="row row-reverse justify-content-center">
+
+        <div class="col-12 col-md-12 col-lg">
+          <div class="text-wrapper align-left">
+            <h1 class="mbr-section-title mbr-fonts-style mb-4 display-2">
+              <strong>Diverse Community</strong>
+            </h1>
+            <p class="mbr-text align-left mbr-fonts-style mb-4 display-7">
+              We celebrate diversity and create an inclusive community where students from all backgrounds feel valued
+              and supported.
+            </p>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-12 col-lg-6 image-wrapper">
+          <img class="w-100" src="assets/images/pexels-neosiam-+-618116.jpg">
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-12 col-lg">
+          <div class="text-wrapper align-left">
+            <h1 class="mbr-section-title mbr-fonts-style mb-4 display-2">
+              <strong>Holistic Development</strong>
+            </h1>
+            <p class="mbr-text align-left mbr-fonts-style mb-4 display-7">
+              We focus on the holistic development of students, nurturing their intellectual, emotional, and social
+              growth.
+            </p>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-12 col-lg-6 image-wrapper">
+          <img class="w-100" src="assets/images/photo-1588075592405-d3d4f0846961.jpeg">
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="features03 " id="news-1-u2a3E2R0lR">
+    <div class="container-fluid"><br><br>
+      <div class="row justify-content-center mb-5">
+        <div class="col-12 content-head">
+          <div class="mbr-section-head">
+            <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+              <strong>Latest Updates</strong>
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="item features-image col-12 col-md-6 col-lg-3 active">
+          <div class="item-wrapper">
+            <div class="item-img mb-3">
+              <img src="assets/School  N/School/karda kinder kids preschool.jpg">
+            </div>
+            <div class="item-content align-left">
+              <h6 class="item-subtitle mbr-fonts-style mb-3 display-5">
+                <strong><a class="text-black fw-bold" href="#">Karda Kinder School</a></strong>
+              </h6>
+              <p class="mbr-text mbr-fonts-style mb-3 display-7">Mar 3, 2021</p>
+              <p class="mbr-text mbr-fonts-style mb-3 display-7">Karda Kinder SchoolHas Organized a grand
+                Annual Day </p>
+              <!-- <div class="mbr-section-btn item-footer"><a href="#" class="btn item-btn btn-primary display-7">Explore</a></div> -->
+            </div>
+          </div>
+        </div>
+        <div class="item features-image col-12 col-md-6 col-lg-3 active">
+          <div class="item-wrapper">
+            <div class="item-img mb-3">
+              <img src="assets/School  N/School/Ryan.jpeg">
+            </div>
+            <div class="item-content align-left">
+              <h6 class="item-subtitle mbr-fonts-style mb-3 display-5">
+                <strong><a class="text-black fw-bold" href="#">Rayn International School</a></strong>
+              </h6>
+              <p class="mbr-text mbr-fonts-style mb-3 display-7">Jan 23, 2024</p>
+              <p class="mbr-text mbr-fonts-style mb-3 display-7">Rayn International School Has Organized a Great Sports
+                Event For all Students in Nashik</p>
+              <!-- <div class="mbr-section-btn item-footer"><a href="#" class="btn item-btn btn-primary display-7">Explore</a></div> -->
+            </div>
+          </div>
+        </div>
+        <div class="item features-image col-12 col-md-6 col-lg-3 active">
+          <div class="item-wrapper">
+            <div class="item-img mb-3">
+              <img src="assets/School  N/School/boys town'.jpeg">
+            </div>
+            <div class="item-content align-left">
+              <h6 class="item-subtitle mbr-fonts-style mb-3 display-5">
+                <strong><a class="text-black fw-bold" href="#">Boys Town Public School</a></strong>
+              </h6>
+              <p class="mbr-text mbr-fonts-style mb-3 display-7">Jan 23, 2024</p>
+              <p class="mbr-text mbr-fonts-style mb-3 display-7">Christmas Celebration in Boys Town Public School and Jr
+                College</p>
+              <!-- <div class="mbr-section-btn item-footer"><a href="#" class="btn item-btn btn-primary display-7">Explore</a></div> -->
+            </div>
+          </div>
+        </div>
+        <div class="item features-image col-12 col-md-6 col-lg-3 active">
+          <div class="item-wrapper">
+            <div class="item-img mb-3">
+              <img src="assets/School  N/School/mvp horizon school.jpg">
+            </div>
+            <div class="item-content align-left">
+              <h6 class="item-subtitle mbr-fonts-style mb-3 display-5">
+                <strong><a class="text-black fw-bold" href="#">Bhonsala Military School</a></strong>
+              </h6>
+              <p class="mbr-text mbr-fonts-style mb-3 display-7">Jan 23, 2024</p>
+              <p class="mbr-text mbr-fonts-style mb-3 display-7">Bhonsala Military School Students gave Excellent
+                Results In CBSE 10th Boards</p>
+              <!-- <div class="mbr-section-btn item-footer"><a href="#" class="btn item-btn btn-primary display-7">Explore</a></div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <style>
+    .contactsection {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+      background-color: transparent;
+    }
+
+    .contactsection .mbr-fallback-image.disabled {
+      display: none;
+    }
+
+    .contactsection .mbr-fallback-image {
+      display: block;
+      background-size: cover;
+      background-position: center center;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+    }
+
+    .contactsection .row {
+      justify-content: center;
+    }
+
+    .contactsection .item {
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 767px) {
+      .contactsection .item {
+        margin-bottom: 1rem;
+      }
+    }
+
+    .contactsection .item .item-wrapper {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: #ffffff;
+      padding: 2.25rem;
+    }
+
+    @media (min-width: 992px) and (max-width: 1200px) {
+      .contactsection .item .item-wrapper {
+        padding: 2rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .contactsection .item .item-wrapper {
+        padding: 2rem 1.5rem;
+      }
+    }
+
+    .contactsection .content-head {
+      max-width: 800px;
+    }
+  </style>
+  <section class="contacts01 contactsection" id="contact">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 content-head">
+          <div class="mbr-section-head mb-4">
+            <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+              <strong>Contact Us</strong>
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="item features-without-image col-12 col-md-6 active">
+          <div class="item-wrapper">
+            <div class="text-wrapper">
+              <h6 class="card-title mbr-fonts-style mb-3 display-5">
+                <strong>Phone</strong>
+              </h6>
+              <p class="mbr-text mbr-fonts-style display-7">
+                <a href="tel:+1234567890" class="text-black">+91 9359948267</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="item features-without-image col-12 col-md-6">
+          <div class="item-wrapper">
+            <div class="text-wrapper">
+              <h6 class="card-title mbr-fonts-style mb-3 display-5">
+                <strong>Email</strong>
+              </h6>
+              <p class="mbr-text mbr-fonts-style display-7">
+                <a href="mailto:info@educonnect.com" class="text-black">atharvaahire203@gmail.com</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="item features-without-image col-12 col-md-6">
+          <div class="item-wrapper">
+            <div class="text-wrapper">
+              <h6 class="card-title mbr-fonts-style mb-3 display-5">
+                <strong>Address</strong>
+              </h6>
+              <p class="mbr-text mbr-fonts-style display-7">
+                The Avenue, Fourth Floor, Behind Prakash Petrol Pump, Govind Nagar, Nashik, Maharashtra 422009
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="item features-without-image col-12 col-md-6">
+          <div class="item-wrapper">
+            <div class="text-wrapper">
+              <h6 class="card-title mbr-fonts-style mb-3 display-5">
+                <strong>Team Members</strong>
+              </h6>
+              <p class="mbr-text mbr-fonts-style display-7">
+              <ul>
+                <li>Atharva Ahire</li>
+                <li>Arwind Prajapati</li>
+                <li>Gaurav Chaudhari</li>
+                <li>Divyanka Pagare</li>
+                <li>Vaishnavi Patil</li>
+              </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <style>
+    .footersection {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+      background-color: #000000;
+    }
+
+    .footersection .social-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .footersection .social-row .soc-item {
+      margin: 8px;
+    }
+
+    .footersection .social-row .soc-item a:hover .mbr-iconfont,
+    .footersection .social-row .soc-item a:focus .mbr-iconfont {
+      background-color: #ffffff;
+    }
+
+    .footersection .social-row .soc-item a .mbr-iconfont {
+      width: 72px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 100%;
+      font-size: 32px;
+      background-color: #edefeb;
+      color: #000000;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .footersection .row-links {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .footersection .header-menu {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 0;
+      margin-bottom: 0;
+    }
+
+    .footersection .header-menu li {
+      padding: 0 1rem 1rem 1rem;
+    }
+
+    .footersection .header-menu li p {
+      margin: 0;
+    }
+
+    .footersection .copyright {
+      margin-bottom: 0;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .footersection .mbr-section-title {
+      color: #ffffff;
+    }
+  </style>
+  <section class="footer3 footersection" once="footers" id="footer-6-u2a3E2TTPn">
+    <div class="container">
+      <div class="row">
+        <div class="row-links">
+          <ul class="header-menu">
+            <li class="header-menu-item mbr-fonts-style display-5">
+              <a href="#home" class="text-white">Home</a>
+            </li>
+            <li class="header-menu-item mbr-fonts-style display-5">
+              <a href="#about" class="text-white">About Us</a>
+            </li>
+            <li class="header-menu-item mbr-fonts-style display-5">
+              <a href="#join" class="text-white">Join Us</a>
+            </li>
+            <li class="header-menu-item mbr-fonts-style display-5">
+              <a href="#contact" class="text-white">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-12 mt-4">
+          <p class="mbr-fonts-style copyright display-7">
+            © 2024 School Advisors. All Rights Reserved.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/dropdown/js/navbar-dropdown.js"></script>
+
+  <script>
+
+    (function () {
+      var animationInput = document.createElement('input');
+      animationInput.setAttribute('name', 'animation');
+      animationInput.setAttribute('type', 'hidden');
+      document.body.append(animationInput);
+    })();
+
+  </script>
+</body>
+
+</html>
