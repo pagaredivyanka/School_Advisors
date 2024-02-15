@@ -53,7 +53,7 @@ Problem Statement -
    Requirements  -
 •	Hardware Requirements –
 
-Windows,	Mac, Linux
+Windows, Mac, Linux
 Operating system - Windows 8 or later, macOS High Sierra 10.13 or later	64-bit
 Ubuntu 14.04+,
 Debian 8+,
@@ -73,6 +73,11 @@ Internet connection - Required
 2.	CSS
 3.	JavaScript
 4.	Bootstrap
+5. React.js
+6. Node.js
+7. Express.js
+8. Mongodb
+9. React Bootstrap
 </pre>
 
    
