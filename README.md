@@ -69,10 +69,10 @@ Internet connection - Required
 </pre>
 <pre>
    •	Software Requirements –
-1.	HTML
-2.	CSS
-3.	JavaScript
-4.	Bootstrap
+1. HTML
+2. CSS
+3. JavaScript
+4. Bootstrap
 5. React.js
 6. Node.js
 7. Express.js
