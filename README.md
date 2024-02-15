@@ -48,7 +48,7 @@ Problem Statement -
    There is a need for robust methods to evaluate the effectiveness of advisory services. Without 
    clear metrics and assessment tools, it becomes challenging to measure the impact of advisory 
    interventions on students' academic achievements, personal growth, and post-graduation success.
-
+</pre>
 Requirements  -
 •	Hardware Requirements –
  	Windows requirements	Mac requirements	Linux requirements
@@ -73,7 +73,7 @@ Internet connection	Required
 Conclusion -
 This project aims to address these challenges by developing a comprehensive solution that leverages technology, personalized strategies, and effective communication channels to enhance the overall efficiency of school advisory services. The goal is to create a scalable and adaptable system that empowers school advisors to provide tailored guidance, fosters stronger student-advisor relationships, and contributes to the overall success and well-being of students in the educational journey.
 
-  
+<pre>  
 Group Project - 
   Members - 
 Divyanka Pagare - Backend 
