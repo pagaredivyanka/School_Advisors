@@ -87,10 +87,10 @@ This project aims to address these challenges by developing a comprehensive solu
 <pre>  
 Group Project - 
   Members - 
-Divyanka Pagare - Backend 
-Atharva Ahire - frontend
-Arvind Prajapati - frontend
-Gaurav Chaudhari - data collection
-Vaishnavi Patil - data collection</pre>
+Divyanka Pagare  
+Atharva Ahire 
+Arvind Prajapati 
+Gaurav Chaudhari 
+Vaishnavi Patil </pre>
 
 
