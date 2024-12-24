@@ -2,6 +2,8 @@
 <p>This project is developed during a Web Development Internship at Sumago Infotech Pvt. Ltd.</p><br>
 <p>Used technologies - HTML, CSS, JS, bootstrap, MERN stack, ReactBootstrap</p>
 
+<img width="698" alt="{2BF373DB-0AE4-4250-A064-8167D591DF48}" src="https://github.com/user-attachments/assets/313cd88b-3313-4263-bdae-842fad8ede3b" />
+
 <pre>
 
 Title –  SchoolAdvisor 
